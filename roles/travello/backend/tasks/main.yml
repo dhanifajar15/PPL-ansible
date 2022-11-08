@@ -15,6 +15,7 @@
     dest: /home/{{ ansible_user }}/script-deploy
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"    
+    
     mode: 0755
   with_items:
     - ../../../../files/templates/backend
