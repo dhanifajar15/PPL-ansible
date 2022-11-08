@@ -1,0 +1,36 @@
+- name: Creates directory
+  file:
+    path: /home/{{ ansible_user }}/script-deploy/webserver
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0775
+    recurse: yes
+  tags:
+    - install-webserver
+
+- name: Clone a github repository
+  git:
+    repo: https://github.com/evgeniy-khist/letsencrypt-docker-compose.git
+    dest: /home/{{ ansible_user }}/script-deploy/webserver
+    clone: yes
+    update: yes
+  tags:
+    - install-webserver
+
+- name: "Copy docker compose and bash script"
+  copy:
+    src: "{{ item }}"
+    dest: /home/{{ ansible_user }}/script-deploy/webserver
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"    
+    mode: 0755
+  with_items:
+    - ../../../../files/templates/webserver
+  tags:
+    - install-webserver
+
+- name: Execute the script for running webserver
+  command: sh /home/{{ ansible_user }}/script-deploy/webserver/script-deploy-webserver.sh
+  tags:
+    - install-webserver

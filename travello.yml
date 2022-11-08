@@ -18,5 +18,6 @@
     - travello/network
     - travello/backend
     - travello/frontend
+    - travello/webserver
 
 
