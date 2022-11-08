@@ -9,17 +9,6 @@
   tags:
     - install-webserver
 
----
-# travello - Default Docker Network
-- name: "create a new docker network"
-  become_user: "{{ ansible_user }}"
-  community.docker.docker_network:
-    name: "PPL-network"
-    state: present
-    timeout: 60
-  tags:
-    - install-webserver
-
 - name: Clone a github repository
   become: false
   git:
@@ -30,9 +19,6 @@
     force: yes
   tags:
     - install-webserver
-
-
-
 
 - name: "Copy docker compose and bash script"
   copy:
@@ -46,14 +32,14 @@
   tags:
     - install-webserver
 
-- name: Create a docker volume
+- name: Create nginx_conf volume
   docker_volume:
     name: nginx_conf
   tags:
     - install-webserver
 
 
-- name: Create a docker volume
+- name: Create letsencrypt_certs volume
   docker_volume:
     name: letsencrypt_certs
   tags:

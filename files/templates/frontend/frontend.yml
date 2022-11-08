@@ -1,0 +1,14 @@
+version: "3.7"
+
+services:
+  frontend:
+    image: dhanifajar15/travello-backend:latest
+    ports:
+      - 3002:80
+    restart: always
+    container_name: travello-frontend
+
+networks:
+  default:
+    name: PPL-network
+    external: true

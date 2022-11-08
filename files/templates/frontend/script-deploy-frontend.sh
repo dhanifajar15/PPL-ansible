@@ -3,8 +3,8 @@
 
 PATH='/home/dhani-azure/script-deploy/frontend'
 DOCKER_USERNAME='dhanifajar15'
-DOCKER_PASSWORD='XXXXXXXXXXXX'
-COMPOSE_NAME='backend'
+DOCKER_PASSWORD='XXXXXXXXXXX'
+COMPOSE_NAME='frontend'
 #----------------------------------------
 
 echo "Deploy new image"
