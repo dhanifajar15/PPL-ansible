@@ -9,19 +9,35 @@
   tags:
     - install-webserver
 
+---
+# travello - Default Docker Network
+- name: "create a new docker network"
+  become_user: "{{ ansible_user }}"
+  community.docker.docker_network:
+    name: "PPL-network"
+    state: present
+    timeout: 60
+  tags:
+    - install-webserver
+
 - name: Clone a github repository
+  become: false
   git:
     repo: https://github.com/evgeniy-khist/letsencrypt-docker-compose.git
     dest: /home/{{ ansible_user }}/script-deploy/webserver
     clone: yes
     update: yes
+    force: yes
   tags:
     - install-webserver
+
+
+
 
 - name: "Copy docker compose and bash script"
   copy:
     src: "{{ item }}"
-    dest: /home/{{ ansible_user }}/script-deploy/webserver
+    dest: /home/{{ ansible_user }}/script-deploy
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"    
     mode: 0755
@@ -30,7 +46,28 @@
   tags:
     - install-webserver
 
-- name: Execute the script for running webserver
-  command: sh /home/{{ ansible_user }}/script-deploy/webserver/script-deploy-webserver.sh
+- name: Create a docker volume
+  docker_volume:
+    name: nginx_conf
+  tags:
+    - install-webserver
+
+
+- name: Create a docker volume
+  docker_volume:
+    name: letsencrypt_certs
+  tags:
+    - install-webserver
+
+- name: Make sure compose service is up
+  become: false
+  docker_compose:
+    project_src: /home/{{ ansible_user }}/script-deploy/webserver
+    files:
+      - "docker-compose.yml"
+    state: present
+    build: yes
+  # vars:
+  #   ansible_python_interpreter: /bin/python3
   tags:
     - install-webserver

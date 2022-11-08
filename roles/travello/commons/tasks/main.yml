@@ -40,7 +40,6 @@
       - ncdu
       - curl
       - htop
-      - nginx
       - whois
       - snapd
       - gnupg
