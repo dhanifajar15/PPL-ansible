@@ -1,0 +1,27 @@
+- name: Creates directory
+  file:
+    path: /home/{{ ansible_user }}/script-deploy/backend
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0775
+    recurse: yes
+  tags:
+    - install-backend
+
+- name: "Copy docker compose and bash script"
+  copy:
+    src: "{{ item }}"
+    dest: /home/{{ ansible_user }}/script-deploy
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"    
+    mode: 0755
+  with_items:
+    - ../../../../files/templates/backend
+  tags:
+    - install-backend
+
+- name: Execute the script for running backend
+  command: sh /home/{{ ansible_user }}/script-deploy/backend/script-deploy-backend.sh
+  tags:
+    - install-backend

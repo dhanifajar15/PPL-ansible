@@ -1,0 +1,27 @@
+- name: Creates directory
+  file:
+    path: /home/{{ ansible_user }}/script-deploy/frontend
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: 0775
+    recurse: yes
+  tags:
+    - install-frontend
+
+- name: "Copy docker compose and bash script"
+  copy:
+    src: "{{ item }}"
+    dest: /home/{{ ansible_user }}/script-deploy
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"    
+    mode: 0755
+  with_items:
+    - ../../../../files/templates/frontend
+  tags:
+    - install-frontend
+
+- name: Execute the script for running frontend
+  command: sh /home/{{ ansible_user }}/script-deploy/frontend/script-deploy-frontend.sh
+  tags:
+    - install-frontend

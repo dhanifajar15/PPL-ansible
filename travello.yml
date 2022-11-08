@@ -1,0 +1,22 @@
+- hosts: all
+  become: true
+  gather_facts: yes
+  vars_files:
+    # ------------- #
+    # TRAVELLO INIT #
+    # ------------- # 
+
+    - group_vars/travello/travello.yml
+    
+  roles:
+    # ------------- #
+    # TRAVELLO INIT #
+    # ------------- # 
+
+    - travello/commons
+    - travello/optimization
+    - travello/network
+    - travello/backend
+    - travello/frontend
+
+
