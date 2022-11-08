@@ -4,7 +4,7 @@ services:
   frontend:
     image: dhanifajar15/travello-backend:latest
     ports:
-      - 3002:80
+      - 8000:8000
     restart: always
     container_name: travello-backend
 

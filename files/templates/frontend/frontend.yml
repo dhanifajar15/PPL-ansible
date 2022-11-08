@@ -2,7 +2,7 @@ version: "3.7"
 
 services:
   frontend:
-    image: dhanifajar15/travello-backend:latest
+    image: dhanifajar15/travello-frontend:latest
     ports:
       - 3002:80
     restart: always
