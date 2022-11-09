@@ -23,6 +23,7 @@
     - install-backend
 
 - name: Execute the script for running backend
+  become_user: "{{ ansible_user }}"
   command: sh /home/{{ ansible_user }}/script-deploy/backend/script-deploy-backend.sh
   tags:
     - install-backend

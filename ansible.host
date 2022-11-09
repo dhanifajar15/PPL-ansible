@@ -1,6 +1,8 @@
 [application]
 # IP for single application
-20.247.105.95
+#20.247.105.95
+
+20.194.228.104
 
 [rancher]
 # IP node for rancher

@@ -22,6 +22,7 @@
     - install-frontend
 
 - name: Execute the script for running frontend
-  command: sh /home/{{ ansible_user }}/script-deploy/frontend/script-deploy-frontend.sh
+  become: false
+  command: bash /home/{{ ansible_user }}/script-deploy/frontend/script-deploy-frontend.sh
   tags:
     - install-frontend

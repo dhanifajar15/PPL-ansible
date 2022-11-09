@@ -33,6 +33,7 @@
     - install-webserver
 
 - name: Create nginx_conf volume
+  become: false
   docker_volume:
     name: nginx_conf
   tags:
@@ -40,6 +41,7 @@
 
 
 - name: Create letsencrypt_certs volume
+  become: false
   docker_volume:
     name: letsencrypt_certs
   tags:
