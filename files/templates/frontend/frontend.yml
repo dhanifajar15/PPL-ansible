@@ -6,9 +6,4 @@ services:
     ports:
       - 3002:80
     restart: always
-    container_name: travello-frontend
-
-networks:
-  default:
-    name: PPL-network
-    external: true
+    container_name: travello-frontends

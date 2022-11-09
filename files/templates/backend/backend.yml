@@ -4,11 +4,6 @@ services:
   frontend:
     image: dhanifajar15/travello-backend:latest
     ports:
-      - 8000:8000
+      - 8080:8080
     restart: always
     container_name: travello-backend
-
-networks:
-  default:
-    name: PPL-network
-    external: true
